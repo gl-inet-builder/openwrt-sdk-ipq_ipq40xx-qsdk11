@@ -81,19 +81,19 @@ build=x86_64-pc-linux-gnu
 build_os=linux-gnu
 
 # A sed program that does not truncate output.
-SED="/data/han/q11/qsdk/staging_dir/host/bin/sed"
+SED="/data/han/q11/ib3/sdk.new/staging_dir/host/bin/sed"
 
 # Sed that helps us avoid accidentally triggering echo(1) options like -n.
 Xsed="$SED -e 1s/^X//"
 
 # A grep program that handles long lines.
-GREP="/data/han/q11/qsdk/staging_dir/host/bin/grep"
+GREP="/data/han/q11/ib3/sdk.new/staging_dir/host/bin/grep"
 
 # An ERE matcher.
-EGREP="/data/han/q11/qsdk/staging_dir/host/bin/grep -E"
+EGREP="/data/han/q11/ib3/sdk.new/staging_dir/host/bin/grep -E"
 
 # A literal string matcher.
-FGREP="/data/han/q11/qsdk/staging_dir/host/bin/grep -F"
+FGREP="/data/han/q11/ib3/sdk.new/staging_dir/host/bin/grep -F"
 
 # A BSD- or MS-compatible name lister.
 NM="arm-openwrt-linux-muslgnueabi-gcc-nm"
@@ -272,7 +272,7 @@ finish_eval=""
 hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0 /data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/arm-openwrt-linux-muslgnueabi/lib "
+sys_lib_search_path_spec="/data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0 /data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc /data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/arm-openwrt-linux-muslgnueabi/lib "
 
 # Run-time system search path for libraries.
 sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /usr/local/lib /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/mesa-egl /usr/lib/x86_64-linux-gnu/mesa /lib32 /usr/lib32 /libx32 /usr/libx32 "
@@ -10213,18 +10213,18 @@ file_list_spec=""
 hardcode_action=immediate
 
 # The directories searched by this compiler when creating a shared library.
-compiler_lib_search_dirs="/data/han/q11/qsdk/staging_dir/target-arm_cortex-a7_musl-1.1.16_eabi/usr/lib /data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0 /data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib"
+compiler_lib_search_dirs="/data/han/q11/ib3/sdk.new/staging_dir/target-arm_cortex-a7_musl-1.1.16_eabi/usr/lib /data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0 /data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc /data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib"
 
 # Dependencies to place before and after the objects being linked to
 # create a shared library.
-predep_objects="/data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib/crti.o /data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/crtbeginS.o"
-postdep_objects="/data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/crtendS.o /data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib/crtn.o"
+predep_objects="/data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib/crti.o /data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/crtbeginS.o"
+postdep_objects="/data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/crtendS.o /data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib/crtn.o"
 predeps=""
 postdeps="-lstdc++ -lm -lssp_nonshared -lgcc_s -lc -lgcc_s"
 
 # The library search path used internally by the compiler when linking
 # a shared library.
-compiler_lib_search_path="-L/data/han/q11/qsdk/staging_dir/target-arm_cortex-a7_musl-1.1.16_eabi/usr/lib -L/data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0 -L/data/han/q11/qsdk/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib"
+compiler_lib_search_path="-L/data/han/q11/ib3/sdk.new/staging_dir/target-arm_cortex-a7_musl-1.1.16_eabi/usr/lib -L/data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0 -L/data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc -L/data/han/q11/ib3/sdk.new/staging_dir/toolchain-arm_cortex-a7_gcc-5.2.0_musl-1.1.16_eabi/bin/../lib/gcc/arm-openwrt-linux-muslgnueabi/5.2.0/../../../../arm-openwrt-linux-muslgnueabi/lib"
 
 # ### END LIBTOOL TAG CONFIG: CXX
 
