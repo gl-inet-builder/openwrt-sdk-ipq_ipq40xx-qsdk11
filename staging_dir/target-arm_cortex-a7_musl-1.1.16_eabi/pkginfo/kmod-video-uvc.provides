@@ -1,7 +1,5 @@
 input-core.ko
 nls_base.ko
-usb-common.ko
-usbcore.ko
 v4l2-common.ko
 videobuf2-core.ko
 videobuf2-memops.ko
