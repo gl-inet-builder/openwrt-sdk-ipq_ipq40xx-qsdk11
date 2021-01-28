@@ -35,6 +35,15 @@ define newline
 
 endef
 
+__tr_list = $(join $(join $(1),$(foreach char,$(1),$(comma))),$(2))
+__tr_head_stripped = $(subst $(space),,$(foreach cv,$(call __tr_list,$(1),$(2)),$$$(paren_left)subst$(cv)$(comma)))
+__tr_head = $(subst $(paren_left)subst,$(paren_left)subst$(space),$(__tr_head_stripped))
+__tr_tail = $(subst $(space),,$(foreach cv,$(1),$(paren_right)))
+__tr_template = $(__tr_head)$$(1)$(__tr_tail)
+
+$(eval toupper = $(call __tr_template,$(chars_lower),$(chars_upper)))
+$(eval tolower = $(call __tr_template,$(chars_upper),$(chars_lower)))
+
 version_abbrev = $(if $(if $(CHECK),,$(DUMP)),$(1),$(shell printf '%.8s' $(1)))
 
 _SINGLE=export MAKEFLAGS=$(space);
@@ -48,7 +57,10 @@ export EXTRA_OPTIMIZATION:=$(call qstrip,$(CONFIG_EXTRA_OPTIMIZATION))
 TARGET_SUFFIX=$(call qstrip,$(CONFIG_TARGET_SUFFIX))
 BUILD_SUFFIX:=$(call qstrip,$(CONFIG_BUILD_SUFFIX))
 SUBDIR:=$(patsubst $(TOPDIR)/%,%,${CURDIR})
+BUILD_SUBDIR:=$(patsubst $(TOPDIR)/%,%,${CURDIR})
 export SHELL:=/usr/bin/env bash
+
+IS_PACKAGE_BUILD := $(if $(filter package/% feeds/%,$(BUILD_SUBDIR)),1)
 
 OPTIMIZE_FOR_CPU=$(subst i386,i486,$(ARCH))
 
@@ -83,8 +95,11 @@ BIN_DIR:=$(if $(call qstrip,$(CONFIG_BINARY_FOLDER)),$(call qstrip,$(CONFIG_BINA
 INCLUDE_DIR:=$(TOPDIR)/include
 SCRIPT_DIR:=$(TOPDIR)/scripts
 BUILD_DIR_BASE:=$(TOPDIR)/build_dir
-BUILD_DIR_HOST:=$(BUILD_DIR_BASE)/host
+
+BUILD_DIR_HOST:=$(if $(IS_PACKAGE_BUILD),$(BUILD_DIR_BASE)/hostpkg,$(BUILD_DIR_BASE)/host)
 STAGING_DIR_HOST:=$(TOPDIR)/staging_dir/host
+STAGING_DIR_HOSTPKG:=$(TOPDIR)/staging_dir/hostpkg
+
 PREBUILT_DIR:=$(TOPDIR)/prebuilt/$(if $(SUBTARGET),$(SUBTARGET),$(BOARD))
 ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
   GCCV:=$(call qstrip,$(CONFIG_GCC_VERSION))
@@ -173,7 +188,7 @@ ifndef DUMP
     endif
   endif
 endif
-TARGET_PATH_PKG:=$(STAGING_DIR)/host/bin:$(TARGET_PATH)
+TARGET_PATH_PKG:=$(STAGING_DIR)/host/bin:$(STAGING_DIR_HOSTPKG)/bin:$(TARGET_PATH)
 
 ifeq ($(CONFIG_SOFT_FLOAT),y)
   SOFT_FLOAT_CONFIG_OPTION:=--with-float=soft
@@ -199,9 +214,15 @@ export PKG_CONFIG
 
 HOSTCC:=gcc
 HOSTCXX:=g++
-HOST_CPPFLAGS:=-I$(STAGING_DIR_HOST)/include -I$(STAGING_DIR_HOST)/usr/include
+
+#HOST_CPPFLAGS:=-I$(STAGING_DIR_HOST)/include -I$(STAGING_DIR_HOST)/usr/include
+#HOST_CFLAGS:=-O2 $(HOST_CPPFLAGS)
+#HOST_LDFLAGS:=-L$(STAGING_DIR_HOST)/lib -L$(STAGING_DIR_HOST)/usr/lib
+
+HOST_CPPFLAGS:=-I$(STAGING_DIR_HOST)/include $(if $(IS_PACKAGE_BUILD),-I$(STAGING_DIR_HOSTPKG)/include -I$(STAGING_DIR)/host/include)
 HOST_CFLAGS:=-O2 $(HOST_CPPFLAGS)
-HOST_LDFLAGS:=-L$(STAGING_DIR_HOST)/lib -L$(STAGING_DIR_HOST)/usr/lib
+HOST_LDFLAGS:=-L$(STAGING_DIR_HOST)/lib $(if $(IS_PACKAGE_BUILD),-L$(STAGING_DIR_HOSTPKG)/lib -L$(STAGING_DIR)/host/lib)
+
 
 ifeq ($(CONFIG_GCC_VERSION_4_4)$(CONFIG_GCC_VERSION_4_6)$(CONFIG_EXTERNAL_TOOLCHAIN),)
   TARGET_AR:=$(TARGET_CROSS)gcc-ar
@@ -219,6 +240,7 @@ TARGET_CC:=$(TARGET_CROSS)gcc
 TARGET_CXX:=$(TARGET_CROSS)g++
 KPATCH:=$(SCRIPT_DIR)/patch-kernel.sh
 SED:=$(STAGING_DIR_HOST)/bin/sed -i -e
+ESED:=$(STAGING_DIR_HOST)/bin/sed -E -i -e
 CP:=cp -fpR
 LN:=ln -sf
 XARGS:=xargs -r
